@@ -1,0 +1,68 @@
+.forest-view{padding:39px 0 13px;max-width:1250px;margin:auto}
+.forest-heading{display:flex;justify-content:space-between;align-items:center;gap:22px;margin-bottom:29px}
+.forest-heading h1{font-size:clamp(30px,3.2vw,48px);letter-spacing:-1.9px;margin:17px 0 12px;line-height:1.1}
+.forest-heading h1 span{color:#c6f577}
+.forest-heading p{color:#94a08b;font-size:12px;line-height:1.7;margin:0}
+.forest-edition{font:9px var(--mono);letter-spacing:1.5px;white-space:nowrap;color:#a1b08f;align-self:flex-start;margin-top:6px;border:1px solid #3c4a31;border-radius:4px;padding:9px 11px}
+.forest-edition>span{padding:0 7px;color:#63754f}
+.forest-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.forest-location{display:flex;gap:7px;align-items:center;font-size:10px;color:#b8c6a9}
+.forest-location b{font-weight:500}
+.forest-location>span:last-child{color:#78866b;border-left:1px solid #3b4633;margin-left:9px;padding-left:13px;font-size:9px}
+.forest-actions{display:flex;align-items:center;gap:8px}
+.forest-actions .outline-button{min-height:31px;padding:6px 10px;font-size:9px;white-space:nowrap}
+.forest-actions .icon-button{width:31px;height:31px}
+.forest-stage{position:relative;border:1px solid #435339;border-radius:6px;overflow:hidden;background:#0b1c1c;isolation:isolate}
+#forest-canvas{display:block;width:100%;height:auto;image-rendering:pixelated;cursor:crosshair;touch-action:none;outline:none}
+#forest-canvas:focus-visible{box-shadow:inset 0 0 0 2px #a3d271}
+.forest-hud{position:absolute;inset:24px 25px auto;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;pointer-events:none;text-shadow:0 1px 8px #061110}
+.forest-scene-name{display:flex;flex-direction:column;gap:8px}
+.forest-scene-name>span{font:8px var(--mono);letter-spacing:2.4px;color:#b4c8aa}
+.forest-scene-name>b{font-size:12px;font-weight:400;color:#d7dfc7}
+.forest-night{display:flex;align-items:center;gap:9px;font:8px var(--mono);letter-spacing:1.3px;color:#abc3b5;border:1px solid #57726473;background:#0b211b8c;border-radius:3px;padding:7px 9px}
+.forest-night>span{font-size:14px;color:#dfdfaf}
+.forest-map{position:absolute;bottom:20px;right:20px;width:146px;background:#0b1a17de;border:1px solid #7a96624d;box-shadow:0 4px 20px #0004;border-radius:4px;overflow:hidden;pointer-events:none}
+.forest-map>div{display:flex;justify-content:space-between;align-items:center;padding:7px 8px;font:7px var(--mono);letter-spacing:1px;color:#98ae86}
+.forest-map>div:last-child{font-size:7px;border-top:1px solid #59734b40;color:#6e8c67}
+#forest-coordinates{color:#c5d4ac;font:8px var(--mono);letter-spacing:0}
+#forest-minimap{display:block;width:144px;height:96px;image-rendering:pixelated;opacity:.85}
+.forest-map-tag{position:absolute;bottom:24px;left:25px;display:flex;align-items:center;font:8px var(--mono);letter-spacing:1.5px;color:#b7cba6;text-shadow:0 1px 5px #000;pointer-events:none}
+.forest-map-tag>span:last-child{color:#78946d;font-size:7px;margin-left:13px;letter-spacing:1px}
+.forest-overlay{position:absolute;inset:0;z-index:2;background:#081815c2;backdrop-filter:blur(4px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px;text-align:center;padding:25px;pointer-events:none}
+.forest-overlay>span{color:var(--accent);font-size:25px}
+.forest-overlay>b{font-size:25px;letter-spacing:-.6px;font-weight:400;color:#e4efce}
+.forest-overlay>p{font-size:11px;color:#9ab086;margin:0;line-height:1.8}
+.forest-controls{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px 2px;color:#89987b;font-size:9px}
+.forest-controls>div{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.forest-controls>span{display:flex;gap:8px;align-items:center;white-space:nowrap}
+.forest-controls kbd{font-size:8px;padding:4px 6px;background:#1a2116;border-color:#35432a;color:#c1cfb0;min-width:20px;text-align:center;box-shadow:0 2px 0 #0d120b}
+.forest-key-group{display:flex;gap:3px;margin-right:2px}
+.forest-control-divider{width:1px;height:12px;background:#34402b;margin:0 8px}
+.forest-click-hint{color:#a3b88b}
+.forest-notes{display:flex;justify-content:space-between;align-items:center;gap:30px;border-top:1px solid #2c3628;padding:25px 0 22px;margin-top:10px}
+.forest-notes>div:first-child{display:flex;gap:19px;align-items:flex-start}
+.forest-note-number{font:9px var(--mono);color:#91a47d;border:1px solid #3f4c34;padding:6px 7px;display:block;margin-top:2px;border-radius:3px}
+.forest-notes h2{font-size:15px;font-weight:400;letter-spacing:-.2px;margin:0 0 9px;color:#ccd8be}
+.forest-notes p{font-size:10px;line-height:1.9;color:#85967a;margin:0;max-width:470px}
+.forest-species{display:flex;gap:18px;white-space:nowrap;align-items:center;font-size:10px;color:#a6b496}
+.forest-species>span{display:flex;align-items:center;gap:7px}
+.forest-species i{width:7px;height:7px;display:inline-block;background:#648051;border-radius:1px}
+.forest-species .pine-dot{background:#476e64}
+.forest-species .willow-dot{background:#80a77c}
+.forest-touch-controls{display:none;align-items:center;justify-content:space-between;gap:20px;padding:9px 0 19px}
+.forest-dpad{display:grid;grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,38px);gap:5px}
+.forest-dpad button,.forest-run{border:1px solid #465a37;background:#1c2919;border-radius:5px;color:#bfd99e;touch-action:none;user-select:none;-webkit-user-select:none}
+.forest-dpad button:first-child{grid-column:2;grid-row:1}
+.forest-dpad button:nth-child(2){grid-column:1;grid-row:2}
+.forest-dpad button:nth-child(3){grid-column:2;grid-row:2}
+.forest-dpad button:nth-child(4){grid-column:3;grid-row:2}
+.forest-dpad .pressed,.forest-run.pressed{background:#3a542a;color:#e4ffc2;border-color:#a2c671}
+.forest-run{height:72px;width:100px;font-size:10px;line-height:1.8}
+.forest-run b{font-weight:500}
+.forest-stage:fullscreen{border:0;border-radius:0;display:flex;justify-content:center;align-items:center;background:#081514}
+.forest-stage:fullscreen #forest-canvas{width:min(100vw,var(--forest-fit-width,160dvh));height:auto}
+@media(min-width:1500px){.forest-view{padding-top:48px}.forest-heading{margin-bottom:33px}}
+@media(max-width:1100px){.forest-heading h1{font-size:35px}.forest-location>span:last-child{display:none}.forest-species{gap:10px;font-size:9px}.forest-notes{gap:18px}.forest-map{transform:scale(.8);transform-origin:bottom right}.forest-click-hint{display:none}}
+@media(max-width:800px){.forest-heading{gap:10px}.forest-heading h1{font-size:31px}.forest-heading p{font-size:11px}.forest-edition{font-size:7px;padding:8px;letter-spacing:.7px}.forest-edition>span{padding:0 3px}.forest-hud{inset:16px 16px auto}.forest-scene-name>span{font-size:7px;letter-spacing:1.6px}.forest-scene-name>b{font-size:10px}.forest-night{font-size:6px;gap:6px;padding:5px 6px}.forest-map{transform:scale(.65);right:12px;bottom:12px}.forest-map-tag{left:16px;bottom:18px;font-size:7px;letter-spacing:1px}.forest-map-tag>span:last-child{display:none}.forest-controls{font-size:8px}.forest-notes{display:block}.forest-species{margin:20px 0 0 53px;gap:22px}}
+@media(max-width:620px){.forest-view{padding-top:27px}.forest-heading{margin-bottom:22px;display:block}.forest-heading h1{font-size:33px;max-width:290px;line-height:1.12;margin:16px 0 11px}.forest-heading .eyebrow{font-size:7px;letter-spacing:1.3px}.forest-edition{display:inline-block;margin-top:17px}.forest-toolbar{gap:8px;padding:12px 0}.forest-location{font-size:9px;gap:2px}.forest-actions{gap:5px}.forest-actions .outline-button{font-size:8px;padding:5px 7px;min-height:29px}.forest-actions .icon-button{width:27px;height:29px}.forest-hud{inset:12px 12px auto}.forest-scene-name>span{font-size:6px;letter-spacing:1px}.forest-scene-name>b{font-size:8px}.forest-night{font-size:5px;letter-spacing:.5px;gap:4px;padding:4px}.forest-night>span{font-size:11px}.forest-map{transform:scale(.48);right:9px;bottom:9px}.forest-map-tag{font-size:6px;bottom:13px;left:12px;letter-spacing:.7px}.forest-controls{padding:13px 0;font-size:8px}.forest-controls>div{gap:5px}.forest-controls kbd{padding:3px 4px;font-size:7px;min-width:16px}.forest-key-group{gap:2px}.forest-control-divider{margin:0 5px}.forest-controls>span{display:none}.forest-notes{padding-top:21px;margin-top:0}.forest-notes p{font-size:10px}.forest-overlay>b{font-size:19px}.forest-overlay>p{font-size:9px}.forest-touch-controls{display:flex}}
+@media(pointer:coarse){.forest-touch-controls{display:flex}.forest-click-hint{display:inline}}

@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+dist/
+records/
+sheets/
+*.log
+.env
+.env.*
+!.env.example
+
+# Vendor PixelFX source without including its local checkout metadata.
+pixelfx/.git/

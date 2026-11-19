@@ -12,8 +12,12 @@ picky pixel artist would: draft, render, look, refine.
 Every effect that involves a character is **acted out**: he winds up, lets go, freezes on contact and recovers, and a
 target takes the hit. Twelve whole moves chain the effects into attacks from wind-up to recovery.
 
+It's also a block on Patch: [play pixelfx on Patch](https://patch.gg/patch/pixel-effects), pick an effect and a
+palette, and start a browser game from it.
+
 **[open the gallery](https://patch-gg.github.io/pixelfx/)** · [catalog](docs/CATALOG.md) · [acting](#acting) ·
-[the skill](#the-skill) · [make your own](#make-your-own) · [how it works](#how-it-works)
+[the skill](#the-skill) · [make your own](#make-your-own) · [publish it on patch](#publish-it-on-patch) ·
+[how it works](#how-it-works)
 
 The method is [Hugo Duprez](https://x.com/HugoDuprez)'s, from [How to make (good) pixel art effects with
 Claude](https://www.spritefusion.com/blog/how-to-make-good-pixel-art-effects-with-claude): code is clay, trust your
@@ -176,6 +180,22 @@ Then go round: look at the contact sheet, fix the worst thing, render again. `--
 `--all` shows every frame. `node tools/act.mjs arcane/my-spell` shows an act as consecutive 12 fps steps, because motion
 bugs don't show in samples. [docs/AUTHORING.md](docs/AUTHORING.md) has the contract, the drawing API and the quality
 bar. `node tools/serve.mjs` runs the gallery locally with your effects in it.
+
+## publish it on patch.
+
+Made a browser game with these? Put it on [Patch](https://patch.gg), where people play and remix browser games and
+mods. Install `pch`, Patch's command line, then restart your coding agent and ask it to publish the game: the install
+gives every agent on your PC Patch's tools. Or run it yourself:
+
+```bash
+npm i -g @patchgg/cli      # or: curl -fsSL https://patch.gg/install.sh | sh
+pch login
+pch init                   # in your game's folder; it says what's next
+pch publish
+```
+
+Publishing needs [Patch Desktop](https://docs.patch.gg/get-started) open on a Windows PC: it plays your game once to
+test it before it goes live. The [quickstart](https://docs.patch.gg/quickstart) has the rest.
 
 ## how it works.
 

@@ -14,7 +14,8 @@ import * as explosion from '../../pixelfx/src/fx/explosions/small-explosion.js';
 import * as nova from '../../pixelfx/src/fx/ice/frost-nova.js';
 import * as heal from '../../pixelfx/src/fx/holy/heal.js';
 import * as levelup from '../../pixelfx/src/fx/ui/level-up.js';
-import {drawAvatar} from './avatar.js';
+import {drawAvatar,appearanceFor} from './avatar.js';
+import {AvatarMotion} from './avatar-motion.js';
 
 const canvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
 function sprite(mod,opts={}){
@@ -24,7 +25,7 @@ function sprite(mod,opts={}){
 export class Renderer {
   constructor(c,stage,i18n){
     this.canvas=c;this.stage=stage;this.i18n=i18n;this.ctx=c.getContext('2d');this.world=createForestWorld();this.terrain=createTerrain(this.world);
-    this.trees=this.world.trees.map(t=>({...t,image:createTree(t.type,t.seed)}));this.state=null;this.active=false;this.camera={x:358,y:376};this.time=0;this.last=0;this.elapsedArt=0;this.effects=[];this.floats=[];this.entityPositions=new Map();
+    this.trees=this.world.trees.map(t=>({...t,image:createTree(t.type,t.seed)}));this.state=null;this.active=false;this.camera={x:358,y:376};this.time=0;this.last=0;this.elapsedArt=0;this.effects=[];this.floats=[];this.entityPositions=new Map();this.avatar=new AvatarMotion();
     this.sprites={slime:sprite(slime,{hop:5}),boss:sprite(slime,{hop:8,palette:['#071a1b','#123b37','#20644e','#438d55','#77b45b','#c7de85','#f4f0c5']}),bat:sprite(bat),frog:sprite(frog),arrow:sprite(arrow),fire:sprite(fireball)};
     this.back=sprite(fireflies);this.glow=createGlow('255,209,133',48);
     this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(stage);this.resize();
@@ -32,11 +33,12 @@ export class Renderer {
   }
   resize(){const r=this.stage.getBoundingClientRect();if(r.width<1||r.height<1)return;this.W=r.width<650?400:800;this.H=Math.max(260,Math.min(750,Math.round(this.W*r.height/r.width)));this.canvas.width=this.W;this.canvas.height=this.H;this.ctx.imageSmoothingEnabled=false;this.frame=createFrame(this.W,this.H);this.image=this.ctx.createImageData(this.W,this.H);this.fxCanvas=canvas(this.W,this.H);}
   activate(active){this.active=active;this.last=0;if(active&&!this.raf)this.raf=requestAnimationFrame(t=>this.loop(t));else if(!active){cancelAnimationFrame(this.raf);this.raf=0;}}
-  update(state){if(!state||this.state?.character.id!==state.character.id)this.entityPositions.clear();this.state=state;}
+  update(state){if(!state||this.state?.character.id!==state.character.id)this.entityPositions.clear();if(state)this.avatar.sync(state);else this.avatar.reset();this.state=state;}
   smooth(id,target,dt){const old=this.entityPositions.get(id);const snap=!old||Math.hypot(old.x-target.x,old.y-target.y)>100||this.state?.paused;const a=1-Math.exp(-dt*24);const next=snap?{x:target.x,y:target.y}:{x:old.x+(target.x-old.x)*a,y:old.y+(target.y-old.y)*a};this.entityPositions.set(id,next);return next;}
   point(clientX,clientY){const r=this.canvas.getBoundingClientRect();return{x:this.camera.x+(clientX-r.left)/r.width*this.W,y:this.camera.y+(clientY-r.top)/r.height*this.H};}
   effect(mod,event,opts={},angle=null){if(angle===null)this.effects.push({fx:createFx(mod,{x:event.x,y:event.y,...opts}),mod});else{const art=sprite(mod,opts);this.effects.push({fx:art.fx,mod,art,x:event.x,y:event.y,angle});}if(this.effects.length>18)this.effects.shift();}
   event(e){
+    if(this.state)this.avatar.event(e,this.state.character.classId);
     if(e.type==='hit'){this.floats.push({x:e.x,y:e.y-22,text:String(e.amount),crit:e.crit,life:1});if(this.effects.length<12)this.effect(spark,e,{height:12});}
     if(e.type==='hurt')this.floats.push({x:e.x,y:e.y-35,text:'−'+e.amount,hurt:true,life:1});
     if(e.type==='cast'&&e.classId==='warrior')this.effect(e.skill.endsWith('shield-bash')?block:slash,e,{radius:e.skill==='basic'?36:48},e.angle);
@@ -47,7 +49,7 @@ export class Renderer {
   }
   draw(dt){
     const {ctx,W,H}=this;this.time+=dt;this.elapsedArt+=dt;
-    const s=this.state,p=s?{...this.smooth('player',s.character.position,dt),classId:s.character.classId,facing:s.facing}:{...this.world.spawn,classId:'warrior',facing:'down'};
+    const s=this.state,p=s?{...this.smooth('player',s.character.position,dt),classId:s.character.classId,facing:s.facing,appearance:appearanceFor(s.character),animation:this.avatar.frame(dt,s)}:{...this.world.spawn,classId:'warrior',facing:'down'};
     this.camera.x=Math.max(0,Math.min(this.world.width-W,p.x-W/2));this.camera.y=Math.max(0,Math.min(this.world.height-H,p.y-H/2));
     if(this.entityPositions.size>64){const ids=new Set(['player',...(s?.enemies??[]).map(e=>e.id)]);for(const id of this.entityPositions.keys())if(!ids.has(id))this.entityPositions.delete(id);}
     const cx=Math.floor(this.camera.x),cy=Math.floor(this.camera.y);
@@ -68,14 +70,14 @@ export class Renderer {
     const entities=[...visible.map(t=>({...t,tree:true})),...(s?.enemies??[]).map(e=>({...e,...this.smooth(e.id,e,dt),enemy:true})),{...p,player:true}].sort((a,b)=>a.y-b.y);
     for(const e of entities){
       if(e.tree){const spec=SPECIES[e.type],occludes=s&&p.y<e.y&&p.y>e.y-spec.height*e.scale&&Math.abs(p.x-e.x)<spec.width*e.scale*.4;ctx.globalAlpha=occludes?.45:1;ctx.drawImage(e.image,Math.round(e.x-spec.width*e.scale/2),Math.round(e.y-(spec.height-8)*e.scale),Math.round(spec.width*e.scale),Math.round(spec.height*e.scale));ctx.globalAlpha=1;}
-      else if(e.player){ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=.4;ctx.drawImage(this.glow,Math.round(p.x)-48,Math.round(p.y)-12-48);ctx.restore();if(!s||s.character.hp>0)drawAvatar(ctx,p,this.time,s?.moving,s?.attacking);else{ctx.fillStyle='#bdb791';ctx.fillRect(p.x-8,p.y-4,16,4);}}
+      else if(e.player){ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=.4;ctx.drawImage(this.glow,Math.round(p.x)-48,Math.round(p.y)-12-48);ctx.restore();drawAvatar(ctx,p,this.time,s?.moving,s?.attacking);}
       else{
         const art=this.sprites[e.kind],scale=e.kind==='boss'?1.7:e.kind==='bat'?.65:.8,[ox,oy]=art.mod.meta.origin;
         ctx.drawImage(art.c,Math.round(e.x-ox*scale),Math.round(e.y-oy*scale),Math.round(art.c.width*scale),Math.round(art.c.height*scale));
         const width=e.kind==='boss'?64:26,barY=e.y-(e.kind==='boss'?65:e.kind==='bat'?35:35);ctx.fillStyle='#13201e';ctx.fillRect(e.x-width/2,barY,width,3);ctx.fillStyle=e.kind==='boss'?'#ddb174':'#93bd74';ctx.fillRect(e.x-width/2,barY,width*e.hp/e.maxHp,3);
       }
     }
-    for(const b of s?.projectiles??[]){const art=this.sprites[b.kind],scale=b.kind==='fire'?.65:.8;ctx.save();ctx.translate(b.x,b.y);ctx.rotate(Math.atan2(b.vy,b.vx));ctx.drawImage(art.c,-art.mod.meta.origin[0]*scale,-art.mod.meta.origin[1]*scale,art.c.width*scale,art.c.height*scale);ctx.restore();}
+    for(const b of s?.projectiles??[]){const art=this.sprites[b.kind],scale=b.kind==='fire'?.65:.8;ctx.save();ctx.translate(b.x,b.y-9);ctx.rotate(Math.atan2(b.vy,b.vx));ctx.drawImage(art.c,-art.mod.meta.origin[0]*scale,-art.mod.meta.origin[1]*scale,art.c.width*scale,art.c.height*scale);ctx.restore();}
     for(const e of this.effects)if(e.art){e.art.render(dt);ctx.save();ctx.translate(e.x,e.y);ctx.rotate(e.angle);ctx.drawImage(e.art.c,-e.mod.meta.origin[0],-e.mod.meta.origin[1]);ctx.restore();}
     ctx.restore();
     if(this.effects.length){clearFrame(this.frame);for(const e of this.effects){if(!e.art)e.fx.update(dt);// Draw world anchors into the camera-offset frame.
@@ -84,5 +86,5 @@ export class Renderer {
     ctx.save();ctx.textAlign='center';ctx.font='bold 10px monospace';for(const f of this.floats){f.life-=dt;f.y-=dt*16;ctx.globalAlpha=Math.max(0,f.life);ctx.fillStyle=f.hurt?'#f6a193':f.crit?'#ffe09a':'#f1efd0';ctx.fillText(f.text,Math.round(f.x-cx),Math.round(f.y-cy));}ctx.restore();this.floats=this.floats.filter(f=>f.life>0);
     const v=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*.25,W/2,H/2,Math.max(W,H)*.68);v.addColorStop(0,'#06151900');v.addColorStop(1,'#06151999');ctx.fillStyle=v;ctx.fillRect(0,0,W,H);
   }
-  loop(now){this.raf=0;if(!this.active)return;const dt=Math.min((now-(this.last||now))/1000,.06);this.last=now;if(!document.hidden&&!this.state?.paused)this.draw(dt);this.raf=requestAnimationFrame(t=>this.loop(t));}
+  loop(now){this.raf=0;if(!this.active)return;const dt=Math.min((now-(this.last||now))/1000,.06);this.last=now;if(!document.hidden&&!this.state?.paused)this.draw(dt);this.onFrame?.(dt);this.raf=requestAnimationFrame(t=>this.loop(t));}
 }

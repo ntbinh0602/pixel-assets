@@ -1,6 +1,6 @@
 import {I18n} from './i18n.js';
 import {Renderer} from './renderer.js';
-import {portrait} from './avatar.js';
+import {portrait,appearanceFor} from './avatar.js';
 import {CONTENT,availablePoints,xpNeeded,skillsFor,itemDefinition,slotLevel} from '../shared/rules.js';
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const durable=new Set(['respawn','potion','pickup','equip','unequip','learn','refund','claim','rest','buy','sell','return']);
@@ -14,6 +14,7 @@ export class NightwoodGame {
   }
   async init(){
     await this.i18n.load();this.mount();this.bind();this.renderer=new Renderer(this.$('#forest-canvas'),this.$('.nw-stage'),this.i18n);
+    this.portraitTime=0;this.portraitElapsed=0;this.renderer.onFrame=dt=>{if(this.phase!=='lobby')return;this.portraitTime+=dt;this.portraitElapsed+=dt;if(this.portraitElapsed>=1/12){this.drawPortraits();this.portraitElapsed=0;}};
     try{this.health=await this.api('/api/health',null,'GET');await this.loadAccount();}catch(e){this.notify(this.i18n.error(e.code));this.renderAuth();}
     this.localize();
   }
@@ -53,11 +54,12 @@ export class NightwoodGame {
   }
   renderLobby(){
     this.setPhase('lobby');const chars=this.characters??[];
-    this.$('#nw-character-list').innerHTML=chars.map(row=>{const c=row.data;return `<button type="button" class="nw-character-card" data-play="${esc(c.id)}"><canvas data-portrait="${c.classId}"></canvas><span><strong>${esc(c.name)}</strong><small>${this.t(c.classId)} · ${this.t('level')} ${c.level}</small></span><b>${this.t('play')}</b></button>`;}).join('');
+    this.$('#nw-character-list').innerHTML=chars.map(row=>{const c=row.data;return `<button type="button" class="nw-character-card" data-play="${esc(c.id)}"><canvas data-portrait="${c.classId}" data-character="${esc(c.id)}"></canvas><span><strong>${esc(c.name)}</strong><small>${this.t(c.classId)} · ${this.t('level')} ${c.level}</small></span><b>${this.t('play')}</b></button>`;}).join('');
     this.$('#nw-class-options').innerHTML=CONTENT.classes.map(c=>`<button type="button" data-choose-class="${c.id}" aria-pressed="${this.selectedClass===c.id}" class="nw-class-card"><canvas data-portrait="${c.id}"></canvas><strong>${this.t(c.id)}</strong><span>${this.t(c.id+'Desc')}</span><small>${c.base.hp} HP · ${c.base.mp} MP</small></button>`).join('');
-    this.$('#nw-create-form').hidden=chars.length>=3;for(const c of this.root.querySelectorAll('[data-portrait]'))portrait(c,c.dataset.portrait);
+    this.$('#nw-create-form').hidden=chars.length>=3;this.drawPortraits();
     this.i18n.apply(this.root);
   }
+  drawPortraits(){for(const canvas of this.root.querySelectorAll('[data-portrait]')){const c=this.characters?.find(row=>row.id===canvas.dataset.character)?.data;portrait(canvas,canvas.dataset.portrait,this.portraitTime??0,c?appearanceFor(c):undefined);}}
   async authenticate(form){
     const mode=this.authMode,data=Object.fromEntries(new FormData(form)),submit=form.querySelector('button[type=submit]');submit.disabled=true;this.lastEmail=data.email??this.lastEmail;
     const callbackURL=location.origin+'/?view=game';

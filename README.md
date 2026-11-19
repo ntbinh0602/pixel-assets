@@ -46,6 +46,9 @@ Docker chỉ cung cấp PostgreSQL (54329) và SMTP giả lập (1025/8025), ch�
 
 Nghỉ tại trại hồi HP/MP và cấp lại ít nhất ba bình. Khi mất focus, game tạm dừng; mất input quá ba giây cũng dừng mô phỏng. Cần bấm Tiếp tục khi quay lại.
 
+
+Nhân vật ba class đã được dựng chi tiết, có bốn hướng, chuyển động riêng và ngoại hình theo trang bị. Xem [ảnh, video và báo cáo nhân vật](docs/CHARACTERS.md).
+
 ## Kiểm thử
 
 Khởi động services trước. Test dùng database có hậu tố `_test`, tách khỏi dữ liệu chơi; test reset schema trong các database đó.

@@ -1,0 +1,271 @@
+
+> test
+> node --test tests/unit/*.test.js tests/integration/*.test.js
+
+TAP version 13
+# Subtest: SIGKILL recovery before/after autosave retains acknowledged economy and replays once
+ok 1 - SIGKILL recovery before/after autosave retains acknowledged economy and replays once
+  ---
+  duration_ms: 17464.394084
+  ...
+# Subtest: real PostgreSQL + SMTP + HTTP + WebSocket
+    # Subtest: signup sends verification through SMTP; unverified cannot sign in
+    ok 1 - signup sends verification through SMTP; unverified cannot sign in
+      ---
+      duration_ms: 505.476917
+      ...
+    # Subtest: ownership, invalid class and three slots (concurrent creation)
+    ok 2 - ownership, invalid class and three slots (concurrent creation)
+      ---
+      duration_ms: 45.752417
+      ...
+    # Subtest: pickup and quest reward replay changes gold and inventory exactly once
+    ok 3 - pickup and quest reward replay changes gold and inventory exactly once
+      ---
+      duration_ms: 30.959
+      ...
+    # Subtest: origin protection and private filesystem
+    ok 4 - origin protection and private filesystem
+      ---
+      duration_ms: 5.730625
+      ...
+    # Subtest: database transaction rollback after update; stale revision rejected
+    ok 5 - database transaction rollback after update; stale revision rejected
+      ---
+      duration_ms: 15.412792
+      ...
+    # Subtest: durable action retry once; another browser transfers writer and restores save
+    ok 6 - durable action retry once; another browser transfers writer and restores save
+      ---
+      duration_ms: 690.687667
+      ...
+    # Subtest: restart application restores acknowledged gold/inventory and locale from PostgreSQL
+    ok 7 - restart application restores acknowledged gold/inventory and locale from PostgreSQL
+      ---
+      duration_ms: 35.002417
+      ...
+# 2026-11-19T07:15:24.155Z WARN [Better Auth]: Invalid password
+    # Subtest: password reset delivers real email, invalidates old password/session and sign out
+    ok 8 - password reset delivers real email, invalidates old password/session and sign out
+      ---
+      duration_ms: 270.288625
+      ...
+    1..8
+ok 2 - real PostgreSQL + SMTP + HTTP + WebSocket
+  ---
+  duration_ms: 1755.965625
+  ...
+# Subtest: combat events select a class action and settle back to locomotion
+ok 3 - combat events select a class action and settle back to locomotion
+  ---
+  duration_ms: 0.832708
+  ...
+# Subtest: death is persistent, ignores hurt/cast, and only respawn releases it
+ok 4 - death is persistent, ignores hurt/cast, and only respawn releases it
+  ---
+  duration_ms: 0.635416
+  ...
+# Subtest: reconnect to a dead character shows final death pose; changing character clears motion
+ok 5 - reconnect to a dead character shows final death pose; changing character clears motion
+  ---
+  duration_ms: 0.117083
+  ...
+# Subtest: running derives from authoritative displacement and action priority handles dodge/hurt
+ok 6 - running derives from authoritative displacement and action priority handles dodge/hurt
+  ---
+  duration_ms: 0.115291
+  ...
+# Subtest: loop poses are deterministic and repeat; no frame-rate dependent randomness
+ok 7 - loop poses are deterministic and repeat; no frame-rate dependent randomness
+  ---
+  duration_ms: 0.744458
+  ...
+# Subtest: appearance follows equipped slots and weapon rarity, without mutating character
+ok 8 - appearance follows equipped slots and weapon rarity, without mutating character
+  ---
+  duration_ms: 0.602541
+  ...
+# Subtest: getting hit during an attack flashes without cancelling the attack
+ok 9 - getting hit during an attack flashes without cancelling the attack
+  ---
+  duration_ms: 0.444333
+  ...
+# Subtest: normalized speed, stale sequence and bounded input
+ok 10 - normalized speed, stale sequence and bounded input
+  ---
+  duration_ms: 9.000083
+  ...
+# Subtest: all spawns walkable outside safe zone; collision and dodge never enter obstacles
+ok 11 - all spawns walkable outside safe zone; collision and dodge never enter obstacles
+  ---
+  duration_ms: 58.382833
+  ...
+# Subtest: warrior: basic hit/miss, no MP cost, skill cooldown and resource checks
+ok 12 - warrior: basic hit/miss, no MP cost, skill cooldown and resource checks
+  ---
+  duration_ms: 1.109666
+  ...
+# Subtest: warrior: full quest rewards reach 5, unlock second skill and clear boss once
+ok 13 - warrior: full quest rewards reach 5, unlock second skill and clear boss once
+  ---
+  duration_ms: 1.088875
+  ...
+# Subtest: mage: basic hit/miss, no MP cost, skill cooldown and resource checks
+ok 14 - mage: basic hit/miss, no MP cost, skill cooldown and resource checks
+  ---
+  duration_ms: 1.293
+  ...
+# Subtest: mage: full quest rewards reach 5, unlock second skill and clear boss once
+ok 15 - mage: full quest rewards reach 5, unlock second skill and clear boss once
+  ---
+  duration_ms: 1.961541
+  ...
+# Subtest: archer: basic hit/miss, no MP cost, skill cooldown and resource checks
+ok 16 - archer: basic hit/miss, no MP cost, skill cooldown and resource checks
+  ---
+  duration_ms: 1.381583
+  ...
+# Subtest: archer: full quest rewards reach 5, unlock second skill and clear boss once
+ok 17 - archer: full quest rewards reach 5, unlock second skill and clear boss once
+  ---
+  duration_ms: 0.649208
+  ...
+# Subtest: piercing arrow damages at most two targets once each
+ok 18 - piercing arrow damages at most two targets once each
+  ---
+  duration_ms: 2.766375
+  ...
+# Subtest: AI telegraph and recover, pause freezes time, death once and safe respawn
+ok 19 - AI telegraph and recover, pause freezes time, death once and safe respawn
+  ---
+  duration_ms: 5.439458
+  ...
+# Subtest: runtime restart retains cooldown, projectiles and per-cast hit set
+ok 20 - runtime restart retains cooldown, projectiles and per-cast hit set
+  ---
+  duration_ms: 2.390375
+  ...
+# Subtest: boss phases cap minions and reset on death
+ok 21 - boss phases cap minions and reset on death
+  ---
+  duration_ms: 3.450166
+  ...
+# Subtest: unequip and re-equip never accumulate stats
+ok 22 - unequip and re-equip never accumulate stats
+  ---
+  duration_ms: 2.573834
+  ...
+# Subtest: warrior can hit an enemy overlapping the player after a leap
+ok 23 - warrior can hit an enemy overlapping the player after a leap
+  ---
+  duration_ms: 1.297458
+  ...
+# Subtest: slime: telegraph precedes impact and leash restores health/home
+ok 24 - slime: telegraph precedes impact and leash restores health/home
+  ---
+  duration_ms: 3.590833
+  ...
+# Subtest: bat: telegraph precedes impact and leash restores health/home
+ok 25 - bat: telegraph precedes impact and leash restores health/home
+  ---
+  duration_ms: 0.606083
+  ...
+# Subtest: frog: telegraph precedes impact and leash restores health/home
+ok 26 - frog: telegraph precedes impact and leash restores health/home
+  ---
+  duration_ms: 1.587167
+  ...
+# Subtest: dodge cannot cross an oak trunk or pond
+ok 27 - dodge cannot cross an oak trunk or pond
+  ---
+  duration_ms: 1.606791
+  ...
+# Subtest: warrior: fresh-character journey via inputs, no XP/kill/admin injection
+ok 28 - warrior: fresh-character journey via inputs, no XP/kill/admin injection
+  ---
+  duration_ms: 641.087625
+  ...
+# Subtest: mage: fresh-character journey via inputs, no XP/kill/admin injection
+ok 29 - mage: fresh-character journey via inputs, no XP/kill/admin injection
+  ---
+  duration_ms: 403.171458
+  ...
+# Subtest: archer: fresh-character journey via inputs, no XP/kill/admin injection
+ok 30 - archer: fresh-character journey via inputs, no XP/kill/admin injection
+  ---
+  duration_ms: 268.5545
+  ...
+# Subtest: Resend HTTPS contract and provider failure are handled without exposing credentials
+ok 31 - Resend HTTPS contract and provider failure are handled without exposing credentials
+  ---
+  duration_ms: 5.110042
+  ...
+# Subtest: content: full design IDs, 10 contiguous maps, 18 skills and real FX
+ok 32 - content: full design IDs, 10 contiguous maps, 18 skills and real FX
+  ---
+  duration_ms: 1.783334
+  ...
+# Subtest: locale keys and interpolation placeholders match; errors have translations
+ok 33 - locale keys and interpolation placeholders match; errors have translations
+  ---
+  duration_ms: 2.251
+  ...
+# Subtest: XP boundary, carry, multi-level and release cap
+ok 34 - XP boundary, carry, multi-level and release cap
+  ---
+  duration_ms: 0.787792
+  ...
+# Subtest: warrior: equipment budgets, gates, class validation and no stat accumulation
+ok 35 - warrior: equipment budgets, gates, class validation and no stat accumulation
+  ---
+  duration_ms: 1.35775
+  ...
+# Subtest: warrior: skill level 5 unlocks; starter rank 2 remains gated at 6
+ok 36 - warrior: skill level 5 unlocks; starter rank 2 remains gated at 6
+  ---
+  duration_ms: 0.526208
+  ...
+# Subtest: mage: equipment budgets, gates, class validation and no stat accumulation
+ok 37 - mage: equipment budgets, gates, class validation and no stat accumulation
+  ---
+  duration_ms: 1.6135
+  ...
+# Subtest: mage: skill level 5 unlocks; starter rank 2 remains gated at 6
+ok 38 - mage: skill level 5 unlocks; starter rank 2 remains gated at 6
+  ---
+  duration_ms: 0.112709
+  ...
+# Subtest: archer: equipment budgets, gates, class validation and no stat accumulation
+ok 39 - archer: equipment budgets, gates, class validation and no stat accumulation
+  ---
+  duration_ms: 0.99675
+  ...
+# Subtest: archer: skill level 5 unlocks; starter rank 2 remains gated at 6
+ok 40 - archer: skill level 5 unlocks; starter rank 2 remains gated at 6
+  ---
+  duration_ms: 0.182375
+  ...
+# Subtest: reject invalid character identity, numbers and save version
+ok 41 - reject invalid character identity, numbers and save version
+  ---
+  duration_ms: 0.382292
+  ...
+# Subtest: XP and skill point formulas agree with all 50 progression rows
+ok 42 - XP and skill point formulas agree with all 50 progression rows
+  ---
+  duration_ms: 0.712209
+  ...
+# Subtest: content validator rejects broken IDs, references and map boundaries
+ok 43 - content validator rejects broken IDs, references and map boundaries
+  ---
+  duration_ms: 17.374375
+  ...
+1..43
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 17683.403667

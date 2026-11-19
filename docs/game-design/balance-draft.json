@@ -1,0 +1,1860 @@
+{
+  "status": "design-proposal-not-runtime-config",
+  "version": 1,
+  "defaultLocale": "vi",
+  "supportedLocales": [
+    "vi",
+    "en"
+  ],
+  "mode": "single-player-online-account",
+  "levelCap": 50,
+  "assetBaseline": {
+    "source": "pixelfx/",
+    "commit": "a84159688af3ca37a4be05a0d422b94451b2e24e",
+    "effects": 244,
+    "categories": 21
+  },
+  "classes": [
+    {
+      "id": "warrior",
+      "name": {
+        "vi": "Chiến binh",
+        "en": "Warrior"
+      },
+      "weapon": {
+        "vi": "Kiếm",
+        "en": "Sword"
+      },
+      "offhand": {
+        "vi": "Khiên",
+        "en": "Shield"
+      },
+      "damageType": "physical",
+      "base": {
+        "hp": 160,
+        "mp": 60,
+        "power": 12,
+        "armor": 8,
+        "speed": 70
+      },
+      "perLevel": {
+        "hp": 14,
+        "mp": 3,
+        "power": 2,
+        "armor": 0.8
+      },
+      "armorMultiplier": 1,
+      "gearHpMultiplier": 1
+    },
+    {
+      "id": "mage",
+      "name": {
+        "vi": "Pháp sư",
+        "en": "Mage"
+      },
+      "weapon": {
+        "vi": "Trượng",
+        "en": "Staff"
+      },
+      "offhand": {
+        "vi": "Pháp thư",
+        "en": "Spellbook"
+      },
+      "damageType": "magic",
+      "base": {
+        "hp": 105,
+        "mp": 140,
+        "power": 14,
+        "armor": 3,
+        "speed": 68
+      },
+      "perLevel": {
+        "hp": 9,
+        "mp": 8,
+        "power": 2,
+        "armor": 0.45
+      },
+      "armorMultiplier": 0.6,
+      "gearHpMultiplier": 0.75
+    },
+    {
+      "id": "archer",
+      "name": {
+        "vi": "Cung thủ",
+        "en": "Archer"
+      },
+      "weapon": {
+        "vi": "Cung",
+        "en": "Bow"
+      },
+      "offhand": {
+        "vi": "Ống tên",
+        "en": "Quiver"
+      },
+      "damageType": "physical",
+      "base": {
+        "hp": 125,
+        "mp": 90,
+        "power": 12,
+        "armor": 5,
+        "speed": 78
+      },
+      "perLevel": {
+        "hp": 11,
+        "mp": 5,
+        "power": 2,
+        "armor": 0.6
+      },
+      "armorMultiplier": 0.8,
+      "gearHpMultiplier": 0.9
+    }
+  ],
+  "maps": [
+    {
+      "id": "firefly-woods",
+      "name": {
+        "vi": "Rừng Đom Đóm",
+        "en": "Firefly Woods"
+      },
+      "minLevel": 1,
+      "maxLevel": 5,
+      "previousBossRequired": null,
+      "boss": {
+        "id": "firefly-woods-boss",
+        "name": {
+          "vi": "Trưởng Lão Slime",
+          "en": "Elder Slime"
+        },
+        "level": 5,
+        "artStatus": "adapted"
+      },
+      "environmentFx": [
+        "weather/fireflies",
+        "weather/fog",
+        "fire/campfire"
+      ],
+      "enemyBases": [
+        "slime",
+        "bat",
+        "frog"
+      ],
+      "areas": [
+        "entry",
+        "exploration",
+        "challenge",
+        "boss-arena"
+      ]
+    },
+    {
+      "id": "deepwood",
+      "name": {
+        "vi": "Rừng Sâu",
+        "en": "Deepwood"
+      },
+      "minLevel": 6,
+      "maxLevel": 10,
+      "previousBossRequired": "firefly-woods-boss",
+      "boss": {
+        "id": "deepwood-boss",
+        "name": {
+          "vi": "Linh Mộc",
+          "en": "Grove Spirit"
+        },
+        "level": 10,
+        "artStatus": "new-art"
+      },
+      "environmentFx": [
+        "weather/fog",
+        "weather/falling-leaves",
+        "nature/root-snare"
+      ],
+      "enemyBases": [
+        "slime",
+        "snake",
+        "wisp"
+      ],
+      "areas": [
+        "entry",
+        "exploration",
+        "challenge",
+        "boss-arena"
+      ]
+    },
+    {
+      "id": "mist-marsh",
+      "name": {
+        "vi": "Đầm Sương",
+        "en": "Mist Marsh"
+      },
+      "minLevel": 11,
+      "maxLevel": 15,
+      "previousBossRequired": "deepwood-boss",
+      "boss": {
+        "id": "mist-marsh-boss",
+        "name": {
+          "vi": "Xà Vương Đầm Lầy",
+          "en": "Marsh Serpent"
+        },
+        "level": 15,
+        "artStatus": "adapted"
+      },
+      "environmentFx": [
+        "weather/rain",
+        "nature/poison-cloud",
+        "water/bubbles"
+      ],
+      "enemyBases": [
+        "frog",
+        "snake",
+        "jellyfish"
+      ],
+      "areas": [
+        "entry",
+        "exploration",
+        "challenge",
+        "boss-arena"
+      ]
+    },
+    {
+      "id": "forgotten-ruins",
+      "name": {
+        "vi": "Phế Tích Cổ",
+        "en": "Forgotten Ruins"
+      },
+      "minLevel": 16,
+      "maxLevel": 20,
+      "previousBossRequired": "mist-marsh-boss",
+      "boss": {
+        "id": "forgotten-ruins-boss",
+        "name": {
+          "vi": "Vệ Binh Cổ Đại",
+          "en": "Ancient Sentinel"
+        },
+        "level": 20,
+        "artStatus": "new-art"
+      },
+      "environmentFx": [
+        "fire/torch",
+        "arcane/rune-circle",
+        "weather/god-rays"
+      ],
+      "enemyBases": [
+        "flying-skull",
+        "eyeball",
+        "ghost"
+      ],
+      "areas": [
+        "entry",
+        "exploration",
+        "challenge",
+        "boss-arena"
+      ]
+    },
+    {
+      "id": "frost-peaks",
+      "name": {
+        "vi": "Đỉnh Băng",
+        "en": "Frost Peaks"
+      },
+      "minLevel": 21,
+      "maxLevel": 25,
+      "previousBossRequired": "forgotten-ruins-boss",
+      "boss": {
+        "id": "frost-peaks-boss",
+        "name": {
+          "vi": "Hộ Vệ Băng Tinh",
+          "en": "Frostcrystal Guardian"
+        },
+        "level": 25,
+        "artStatus": "new-art"
+      },
+      "environmentFx": [
+        "weather/snow",
+        "weather/blizzard",
+        "ice/ice-crystal"
+      ],
+      "enemyBases": [
+        "slime",
+        "bat",
+        "wisp"
+      ],
+      "areas": [
+        "entry",
+        "exploration",
+        "challenge",
+        "boss-arena"
+      ]
+    },
+    {
+      "id": "storm-highlands",
+      "name": {
+        "vi": "Cao Nguyên Sấm",
+        "en": "Storm Highlands"
+      },
+      "minLevel": 26,
+      "maxLevel": 30,
+      "previousBossRequired": "frost-peaks-boss",
+      "boss": {
+        "id": "storm-highlands-boss",
+        "name": {
+          "vi": "Mắt Bão",
+          "en": "Tempest Eye"
+        },
+        "level": 30,
+        "artStatus": "adapted"
+      },
+      "environmentFx": [
+        "weather/storm",
+        "lightning/storm-cloud",
+        "lightning/lightning-strike"
+      ],
+      "enemyBases": [
+        "bird",
+        "wisp",
+        "eyeball"
+      ],
+      "areas": [
+        "entry",
+        "exploration",
+        "challenge",
+        "boss-arena"
+      ]
+    },
+    {
+      "id": "ashen-valley",
+      "name": {
+        "vi": "Thung Lũng Tro",
+        "en": "Ashen Valley"
+      },
+      "minLevel": 31,
+      "maxLevel": 35,
+      "previousBossRequired": "storm-highlands-boss",
+      "boss": {
+        "id": "ashen-valley-boss",
+        "name": {
+          "vi": "Thạch Nhân Dung Nham",
+          "en": "Lava Golem"
+        },
+        "level": 35,
+        "artStatus": "new-art"
+      },
+      "environmentFx": [
+        "weather/fog",
+        "fire/spirit-flame",
+        "fire/flame-pillar"
+      ],
+      "enemyBases": [
+        "slime",
+        "bat",
+        "flying-skull"
+      ],
+      "areas": [
+        "entry",
+        "exploration",
+        "challenge",
+        "boss-arena"
+      ]
+    },
+    {
+      "id": "shadow-catacombs",
+      "name": {
+        "vi": "Hầm Mộ Bóng Tối",
+        "en": "Shadow Catacombs"
+      },
+      "minLevel": 36,
+      "maxLevel": 40,
+      "previousBossRequired": "ashen-valley-boss",
+      "boss": {
+        "id": "shadow-catacombs-boss",
+        "name": {
+          "vi": "Chúa Tể Oán Linh",
+          "en": "Wraith Lord"
+        },
+        "level": 40,
+        "artStatus": "adapted"
+      },
+      "environmentFx": [
+        "shadow/shadow-flames",
+        "shadow/curse",
+        "weather/fog"
+      ],
+      "enemyBases": [
+        "ghost",
+        "flying-skull",
+        "eyeball"
+      ],
+      "areas": [
+        "entry",
+        "exploration",
+        "challenge",
+        "boss-arena"
+      ]
+    },
+    {
+      "id": "astral-rift",
+      "name": {
+        "vi": "Khe Nứt Tinh Giới",
+        "en": "Astral Rift"
+      },
+      "minLevel": 41,
+      "maxLevel": 45,
+      "previousBossRequired": "shadow-catacombs-boss",
+      "boss": {
+        "id": "astral-rift-boss",
+        "name": {
+          "vi": "Kẻ Canh Khe Nứt",
+          "en": "Rift Watcher"
+        },
+        "level": 45,
+        "artStatus": "adapted"
+      },
+      "environmentFx": [
+        "arcane/portal",
+        "arcane/star-fall",
+        "shadow/void-orb"
+      ],
+      "enemyBases": [
+        "wisp",
+        "jellyfish",
+        "eyeball"
+      ],
+      "areas": [
+        "entry",
+        "exploration",
+        "challenge",
+        "boss-arena"
+      ]
+    },
+    {
+      "id": "world-tree",
+      "name": {
+        "vi": "Lõi Cổ Thụ",
+        "en": "Heart of the World Tree"
+      },
+      "minLevel": 46,
+      "maxLevel": 50,
+      "previousBossRequired": "astral-rift-boss",
+      "boss": {
+        "id": "world-tree-boss",
+        "name": {
+          "vi": "Trái Tim Tha Hóa",
+          "en": "Corrupted Heart"
+        },
+        "level": 50,
+        "artStatus": "new-art"
+      },
+      "environmentFx": [
+        "weather/fireflies",
+        "nature/healing-bloom",
+        "shadow/shadow-tendrils"
+      ],
+      "enemyBases": [
+        "snake",
+        "frog",
+        "ghost"
+      ],
+      "areas": [
+        "entry",
+        "exploration",
+        "challenge",
+        "boss-arena"
+      ]
+    }
+  ],
+  "equipmentTiers": [
+    {
+      "tier": 1,
+      "minLevel": 1,
+      "maxLevel": 5,
+      "setName": {
+        "vi": "Tân Binh",
+        "en": "Novice"
+      },
+      "weaponPower": 4,
+      "fullArmorBudget": 10,
+      "fullGearHpBudget": 20,
+      "maxRarity": "common",
+      "items": {
+        "warrior": {
+          "weapon": {
+            "vi": "Kiếm Tân Binh",
+            "en": "Novice Sword"
+          },
+          "offhand": {
+            "vi": "Khiên Tân Binh",
+            "en": "Novice Shield"
+          }
+        },
+        "mage": {
+          "weapon": {
+            "vi": "Trượng Tân Binh",
+            "en": "Novice Staff"
+          },
+          "offhand": {
+            "vi": "Pháp thư Tân Binh",
+            "en": "Novice Spellbook"
+          }
+        },
+        "archer": {
+          "weapon": {
+            "vi": "Cung Tân Binh",
+            "en": "Novice Bow"
+          },
+          "offhand": {
+            "vi": "Ống tên Tân Binh",
+            "en": "Novice Quiver"
+          }
+        }
+      }
+    },
+    {
+      "tier": 2,
+      "minLevel": 6,
+      "maxLevel": 10,
+      "setName": {
+        "vi": "Lâm Vệ",
+        "en": "Groveguard"
+      },
+      "weaponPower": 10,
+      "fullArmorBudget": 18,
+      "fullGearHpBudget": 45,
+      "maxRarity": "uncommon",
+      "items": {
+        "warrior": {
+          "weapon": {
+            "vi": "Kiếm Lâm Vệ",
+            "en": "Groveguard Sword"
+          },
+          "offhand": {
+            "vi": "Khiên Lâm Vệ",
+            "en": "Groveguard Shield"
+          }
+        },
+        "mage": {
+          "weapon": {
+            "vi": "Trượng Lâm Vệ",
+            "en": "Groveguard Staff"
+          },
+          "offhand": {
+            "vi": "Pháp thư Lâm Vệ",
+            "en": "Groveguard Spellbook"
+          }
+        },
+        "archer": {
+          "weapon": {
+            "vi": "Cung Lâm Vệ",
+            "en": "Groveguard Bow"
+          },
+          "offhand": {
+            "vi": "Ống tên Lâm Vệ",
+            "en": "Groveguard Quiver"
+          }
+        }
+      }
+    },
+    {
+      "tier": 3,
+      "minLevel": 11,
+      "maxLevel": 15,
+      "setName": {
+        "vi": "Sương Lam",
+        "en": "Mistbound"
+      },
+      "weaponPower": 18,
+      "fullArmorBudget": 26,
+      "fullGearHpBudget": 75,
+      "maxRarity": "uncommon",
+      "items": {
+        "warrior": {
+          "weapon": {
+            "vi": "Kiếm Sương Lam",
+            "en": "Mistbound Sword"
+          },
+          "offhand": {
+            "vi": "Khiên Sương Lam",
+            "en": "Mistbound Shield"
+          }
+        },
+        "mage": {
+          "weapon": {
+            "vi": "Trượng Sương Lam",
+            "en": "Mistbound Staff"
+          },
+          "offhand": {
+            "vi": "Pháp thư Sương Lam",
+            "en": "Mistbound Spellbook"
+          }
+        },
+        "archer": {
+          "weapon": {
+            "vi": "Cung Sương Lam",
+            "en": "Mistbound Bow"
+          },
+          "offhand": {
+            "vi": "Ống tên Sương Lam",
+            "en": "Mistbound Quiver"
+          }
+        }
+      }
+    },
+    {
+      "tier": 4,
+      "minLevel": 16,
+      "maxLevel": 20,
+      "setName": {
+        "vi": "Di Tích",
+        "en": "Relic"
+      },
+      "weaponPower": 27,
+      "fullArmorBudget": 35,
+      "fullGearHpBudget": 110,
+      "maxRarity": "rare",
+      "items": {
+        "warrior": {
+          "weapon": {
+            "vi": "Kiếm Di Tích",
+            "en": "Relic Sword"
+          },
+          "offhand": {
+            "vi": "Khiên Di Tích",
+            "en": "Relic Shield"
+          }
+        },
+        "mage": {
+          "weapon": {
+            "vi": "Trượng Di Tích",
+            "en": "Relic Staff"
+          },
+          "offhand": {
+            "vi": "Pháp thư Di Tích",
+            "en": "Relic Spellbook"
+          }
+        },
+        "archer": {
+          "weapon": {
+            "vi": "Cung Di Tích",
+            "en": "Relic Bow"
+          },
+          "offhand": {
+            "vi": "Ống tên Di Tích",
+            "en": "Relic Quiver"
+          }
+        }
+      }
+    },
+    {
+      "tier": 5,
+      "minLevel": 21,
+      "maxLevel": 25,
+      "setName": {
+        "vi": "Băng Tinh",
+        "en": "Frostcrystal"
+      },
+      "weaponPower": 38,
+      "fullArmorBudget": 45,
+      "fullGearHpBudget": 150,
+      "maxRarity": "rare",
+      "items": {
+        "warrior": {
+          "weapon": {
+            "vi": "Kiếm Băng Tinh",
+            "en": "Frostcrystal Sword"
+          },
+          "offhand": {
+            "vi": "Khiên Băng Tinh",
+            "en": "Frostcrystal Shield"
+          }
+        },
+        "mage": {
+          "weapon": {
+            "vi": "Trượng Băng Tinh",
+            "en": "Frostcrystal Staff"
+          },
+          "offhand": {
+            "vi": "Pháp thư Băng Tinh",
+            "en": "Frostcrystal Spellbook"
+          }
+        },
+        "archer": {
+          "weapon": {
+            "vi": "Cung Băng Tinh",
+            "en": "Frostcrystal Bow"
+          },
+          "offhand": {
+            "vi": "Ống tên Băng Tinh",
+            "en": "Frostcrystal Quiver"
+          }
+        }
+      }
+    },
+    {
+      "tier": 6,
+      "minLevel": 26,
+      "maxLevel": 30,
+      "setName": {
+        "vi": "Lôi Vân",
+        "en": "Stormcloud"
+      },
+      "weaponPower": 51,
+      "fullArmorBudget": 56,
+      "fullGearHpBudget": 200,
+      "maxRarity": "rare",
+      "items": {
+        "warrior": {
+          "weapon": {
+            "vi": "Kiếm Lôi Vân",
+            "en": "Stormcloud Sword"
+          },
+          "offhand": {
+            "vi": "Khiên Lôi Vân",
+            "en": "Stormcloud Shield"
+          }
+        },
+        "mage": {
+          "weapon": {
+            "vi": "Trượng Lôi Vân",
+            "en": "Stormcloud Staff"
+          },
+          "offhand": {
+            "vi": "Pháp thư Lôi Vân",
+            "en": "Stormcloud Spellbook"
+          }
+        },
+        "archer": {
+          "weapon": {
+            "vi": "Cung Lôi Vân",
+            "en": "Stormcloud Bow"
+          },
+          "offhand": {
+            "vi": "Ống tên Lôi Vân",
+            "en": "Stormcloud Quiver"
+          }
+        }
+      }
+    },
+    {
+      "tier": 7,
+      "minLevel": 31,
+      "maxLevel": 35,
+      "setName": {
+        "vi": "Tro Hồng",
+        "en": "Ember"
+      },
+      "weaponPower": 66,
+      "fullArmorBudget": 68,
+      "fullGearHpBudget": 260,
+      "maxRarity": "epic",
+      "items": {
+        "warrior": {
+          "weapon": {
+            "vi": "Kiếm Tro Hồng",
+            "en": "Ember Sword"
+          },
+          "offhand": {
+            "vi": "Khiên Tro Hồng",
+            "en": "Ember Shield"
+          }
+        },
+        "mage": {
+          "weapon": {
+            "vi": "Trượng Tro Hồng",
+            "en": "Ember Staff"
+          },
+          "offhand": {
+            "vi": "Pháp thư Tro Hồng",
+            "en": "Ember Spellbook"
+          }
+        },
+        "archer": {
+          "weapon": {
+            "vi": "Cung Tro Hồng",
+            "en": "Ember Bow"
+          },
+          "offhand": {
+            "vi": "Ống tên Tro Hồng",
+            "en": "Ember Quiver"
+          }
+        }
+      }
+    },
+    {
+      "tier": 8,
+      "minLevel": 36,
+      "maxLevel": 40,
+      "setName": {
+        "vi": "Dạ Ảnh",
+        "en": "Nightshade"
+      },
+      "weaponPower": 83,
+      "fullArmorBudget": 81,
+      "fullGearHpBudget": 330,
+      "maxRarity": "epic",
+      "items": {
+        "warrior": {
+          "weapon": {
+            "vi": "Kiếm Dạ Ảnh",
+            "en": "Nightshade Sword"
+          },
+          "offhand": {
+            "vi": "Khiên Dạ Ảnh",
+            "en": "Nightshade Shield"
+          }
+        },
+        "mage": {
+          "weapon": {
+            "vi": "Trượng Dạ Ảnh",
+            "en": "Nightshade Staff"
+          },
+          "offhand": {
+            "vi": "Pháp thư Dạ Ảnh",
+            "en": "Nightshade Spellbook"
+          }
+        },
+        "archer": {
+          "weapon": {
+            "vi": "Cung Dạ Ảnh",
+            "en": "Nightshade Bow"
+          },
+          "offhand": {
+            "vi": "Ống tên Dạ Ảnh",
+            "en": "Nightshade Quiver"
+          }
+        }
+      }
+    },
+    {
+      "tier": 9,
+      "minLevel": 41,
+      "maxLevel": 45,
+      "setName": {
+        "vi": "Tinh Giới",
+        "en": "Astral"
+      },
+      "weaponPower": 100,
+      "fullArmorBudget": 94,
+      "fullGearHpBudget": 400,
+      "maxRarity": "epic",
+      "items": {
+        "warrior": {
+          "weapon": {
+            "vi": "Kiếm Tinh Giới",
+            "en": "Astral Sword"
+          },
+          "offhand": {
+            "vi": "Khiên Tinh Giới",
+            "en": "Astral Shield"
+          }
+        },
+        "mage": {
+          "weapon": {
+            "vi": "Trượng Tinh Giới",
+            "en": "Astral Staff"
+          },
+          "offhand": {
+            "vi": "Pháp thư Tinh Giới",
+            "en": "Astral Spellbook"
+          }
+        },
+        "archer": {
+          "weapon": {
+            "vi": "Cung Tinh Giới",
+            "en": "Astral Bow"
+          },
+          "offhand": {
+            "vi": "Ống tên Tinh Giới",
+            "en": "Astral Quiver"
+          }
+        }
+      }
+    },
+    {
+      "tier": 10,
+      "minLevel": 46,
+      "maxLevel": 50,
+      "setName": {
+        "vi": "Cổ Thụ",
+        "en": "Worldroot"
+      },
+      "weaponPower": 118,
+      "fullArmorBudget": 108,
+      "fullGearHpBudget": 480,
+      "maxRarity": "legendary",
+      "items": {
+        "warrior": {
+          "weapon": {
+            "vi": "Kiếm Cổ Thụ",
+            "en": "Worldroot Sword"
+          },
+          "offhand": {
+            "vi": "Khiên Cổ Thụ",
+            "en": "Worldroot Shield"
+          }
+        },
+        "mage": {
+          "weapon": {
+            "vi": "Trượng Cổ Thụ",
+            "en": "Worldroot Staff"
+          },
+          "offhand": {
+            "vi": "Pháp thư Cổ Thụ",
+            "en": "Worldroot Spellbook"
+          }
+        },
+        "archer": {
+          "weapon": {
+            "vi": "Cung Cổ Thụ",
+            "en": "Worldroot Bow"
+          },
+          "offhand": {
+            "vi": "Ống tên Cổ Thụ",
+            "en": "Worldroot Quiver"
+          }
+        }
+      }
+    }
+  ],
+  "skills": [
+    {
+      "id": "warrior.sweeping-slash",
+      "classId": "warrior",
+      "name": {
+        "vi": "Trảm Kích",
+        "en": "Sweeping Slash"
+      },
+      "minLevel": 1,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        1,
+        6,
+        11,
+        16,
+        21
+      ],
+      "basePowerCoefficient": 1.5,
+      "baseMana": 6,
+      "baseCooldownSeconds": 3,
+      "fxIds": [
+        "melee/sword-slash",
+        "impacts/hit-spark"
+      ],
+      "damageModel": "per-target-per-cast"
+    },
+    {
+      "id": "warrior.shield-bash",
+      "classId": "warrior",
+      "name": {
+        "vi": "Khiên Kích",
+        "en": "Shield Bash"
+      },
+      "minLevel": 5,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "basePowerCoefficient": 1.1,
+      "baseMana": 10,
+      "baseCooldownSeconds": 7,
+      "fxIds": [
+        "impacts/shield-block",
+        "impacts/blunt-hit"
+      ],
+      "damageModel": "per-target-per-cast"
+    },
+    {
+      "id": "warrior.dash-strike",
+      "classId": "warrior",
+      "name": {
+        "vi": "Xung Phong",
+        "en": "Dash Strike"
+      },
+      "minLevel": 10,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        10,
+        15,
+        20,
+        25,
+        30
+      ],
+      "basePowerCoefficient": 1.8,
+      "baseMana": 12,
+      "baseCooldownSeconds": 8,
+      "fxIds": [
+        "melee/heavy-cleave",
+        "impacts/crit-hit"
+      ],
+      "damageModel": "per-target-per-cast"
+    },
+    {
+      "id": "warrior.iron-will",
+      "classId": "warrior",
+      "name": {
+        "vi": "Ý Chí Sắt",
+        "en": "Iron Will"
+      },
+      "minLevel": 15,
+      "kind": "passive",
+      "maxRank": 5,
+      "rankLevelGates": [
+        15,
+        20,
+        25,
+        30,
+        35
+      ],
+      "basePowerCoefficient": null,
+      "baseMana": 0,
+      "baseCooldownSeconds": 0,
+      "fxIds": [
+        "holy/divine-shield"
+      ],
+      "damageModel": "none",
+      "passivePerRank": {
+        "damageReduction": 0.02
+      }
+    },
+    {
+      "id": "warrior.earth-stomp",
+      "classId": "warrior",
+      "name": {
+        "vi": "Địa Chấn",
+        "en": "Earth Stomp"
+      },
+      "minLevel": 20,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "basePowerCoefficient": 2.2,
+      "baseMana": 18,
+      "baseCooldownSeconds": 12,
+      "fxIds": [
+        "impacts/ground-slam",
+        "nature/earth-spike"
+      ],
+      "damageModel": "per-target-per-cast"
+    },
+    {
+      "id": "warrior.blade-tempest",
+      "classId": "warrior",
+      "name": {
+        "vi": "Bão Kiếm",
+        "en": "Blade Tempest"
+      },
+      "minLevel": 30,
+      "kind": "ultimate",
+      "maxRank": 5,
+      "rankLevelGates": [
+        30,
+        35,
+        40,
+        45,
+        50
+      ],
+      "basePowerCoefficient": 4.5,
+      "baseMana": 30,
+      "baseCooldownSeconds": 30,
+      "fxIds": [
+        "melee/spin-slash",
+        "melee/double-slash"
+      ],
+      "damageModel": "per-target-per-cast",
+      "maxHitsPerTarget": 6,
+      "damageDurationSeconds": 1.2
+    },
+    {
+      "id": "mage.fireball",
+      "classId": "mage",
+      "name": {
+        "vi": "Hỏa Cầu",
+        "en": "Fireball"
+      },
+      "minLevel": 1,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        1,
+        6,
+        11,
+        16,
+        21
+      ],
+      "basePowerCoefficient": 1.8,
+      "baseMana": 10,
+      "baseCooldownSeconds": 3,
+      "fxIds": [
+        "fire/fireball",
+        "explosions/small-explosion"
+      ],
+      "damageModel": "per-target-per-cast"
+    },
+    {
+      "id": "mage.frost-nova",
+      "classId": "mage",
+      "name": {
+        "vi": "Băng Hoàn",
+        "en": "Frost Nova"
+      },
+      "minLevel": 5,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "basePowerCoefficient": 1.2,
+      "baseMana": 16,
+      "baseCooldownSeconds": 8,
+      "fxIds": [
+        "ice/frost-nova",
+        "status/slowed"
+      ],
+      "damageModel": "per-target-per-cast"
+    },
+    {
+      "id": "mage.blink",
+      "classId": "mage",
+      "name": {
+        "vi": "Dịch Chuyển",
+        "en": "Blink"
+      },
+      "minLevel": 10,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        10,
+        15,
+        20,
+        25,
+        30
+      ],
+      "basePowerCoefficient": null,
+      "baseMana": 14,
+      "baseCooldownSeconds": 9,
+      "fxIds": [
+        "arcane/blink-out",
+        "arcane/blink-in"
+      ],
+      "damageModel": "none",
+      "manaScalesWithRank": false
+    },
+    {
+      "id": "mage.arcane-mind",
+      "classId": "mage",
+      "name": {
+        "vi": "Tâm Trí Huyền Thuật",
+        "en": "Arcane Mind"
+      },
+      "minLevel": 15,
+      "kind": "passive",
+      "maxRank": 5,
+      "rankLevelGates": [
+        15,
+        20,
+        25,
+        30,
+        35
+      ],
+      "basePowerCoefficient": null,
+      "baseMana": 0,
+      "baseCooldownSeconds": 0,
+      "fxIds": [
+        "arcane/mana-burst"
+      ],
+      "damageModel": "none",
+      "passivePerRank": {
+        "maxMpIncrease": 0.04
+      }
+    },
+    {
+      "id": "mage.chain-lightning",
+      "classId": "mage",
+      "name": {
+        "vi": "Liên Hoàn Lôi",
+        "en": "Chain Lightning"
+      },
+      "minLevel": 20,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "basePowerCoefficient": 2.4,
+      "baseMana": 24,
+      "baseCooldownSeconds": 10,
+      "fxIds": [
+        "lightning/chain-lightning",
+        "lightning/zap-hit"
+      ],
+      "damageModel": "shared-cast-budget",
+      "maxTargetsByRank": [
+        3,
+        3,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "mage.meteor",
+      "classId": "mage",
+      "name": {
+        "vi": "Thiên Thạch",
+        "en": "Meteor"
+      },
+      "minLevel": 30,
+      "kind": "ultimate",
+      "maxRank": 5,
+      "rankLevelGates": [
+        30,
+        35,
+        40,
+        45,
+        50
+      ],
+      "basePowerCoefficient": 5.0,
+      "baseMana": 40,
+      "baseCooldownSeconds": 30,
+      "fxIds": [
+        "fire/meteor",
+        "explosions/big-explosion"
+      ],
+      "damageModel": "per-target-per-cast"
+    },
+    {
+      "id": "archer.piercing-arrow",
+      "classId": "archer",
+      "name": {
+        "vi": "Xuyên Tiễn",
+        "en": "Piercing Arrow"
+      },
+      "minLevel": 1,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        1,
+        6,
+        11,
+        16,
+        21
+      ],
+      "basePowerCoefficient": 1.6,
+      "baseMana": 6,
+      "baseCooldownSeconds": 3,
+      "fxIds": [
+        "projectiles/arrow",
+        "impacts/hit-spark"
+      ],
+      "damageModel": "per-target-per-cast",
+      "maxTargets": 2,
+      "maxHitsPerTarget": 1
+    },
+    {
+      "id": "archer.fan-arrows",
+      "classId": "archer",
+      "name": {
+        "vi": "Tản Tiễn",
+        "en": "Fan of Arrows"
+      },
+      "minLevel": 5,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "basePowerCoefficient": 0.65,
+      "baseMana": 12,
+      "baseCooldownSeconds": 6,
+      "fxIds": [
+        "projectiles/arrow"
+      ],
+      "damageModel": "per-projectile",
+      "baseProjectileCount": 3,
+      "baseTotalCoefficient": 1.95,
+      "maxProjectilesPerTarget": 1,
+      "projectileCountsByRank": [
+        3,
+        3,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "archer.evasive-step",
+      "classId": "archer",
+      "name": {
+        "vi": "Bước Né",
+        "en": "Evasive Step"
+      },
+      "minLevel": 10,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        10,
+        15,
+        20,
+        25,
+        30
+      ],
+      "basePowerCoefficient": null,
+      "baseMana": 10,
+      "baseCooldownSeconds": 8,
+      "fxIds": [
+        "spawn/poof",
+        "status/haste"
+      ],
+      "damageModel": "none",
+      "manaScalesWithRank": false
+    },
+    {
+      "id": "archer.eagle-eye",
+      "classId": "archer",
+      "name": {
+        "vi": "Mắt Đại Bàng",
+        "en": "Eagle Eye"
+      },
+      "minLevel": 15,
+      "kind": "passive",
+      "maxRank": 5,
+      "rankLevelGates": [
+        15,
+        20,
+        25,
+        30,
+        35
+      ],
+      "basePowerCoefficient": null,
+      "baseMana": 0,
+      "baseCooldownSeconds": 0,
+      "fxIds": [
+        "ui/crit-number"
+      ],
+      "damageModel": "none",
+      "passivePerRank": {
+        "critChanceIncrease": 0.02
+      }
+    },
+    {
+      "id": "archer.venom-arrow",
+      "classId": "archer",
+      "name": {
+        "vi": "Độc Tiễn",
+        "en": "Venom Arrow"
+      },
+      "minLevel": 20,
+      "kind": "active",
+      "maxRank": 5,
+      "rankLevelGates": [
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "basePowerCoefficient": 1.4,
+      "baseMana": 14,
+      "baseCooldownSeconds": 9,
+      "fxIds": [
+        "projectiles/arrow",
+        "nature/poison-cloud",
+        "status/poisoned"
+      ],
+      "damageModel": "per-target-per-cast",
+      "dotTotalCoefficient": 0.6,
+      "dotDurationSeconds": 3,
+      "dotStacking": "refresh-only",
+      "dotDamageType": "poison"
+    },
+    {
+      "id": "archer.arrow-storm",
+      "classId": "archer",
+      "name": {
+        "vi": "Mưa Tên",
+        "en": "Arrow Storm"
+      },
+      "minLevel": 30,
+      "kind": "ultimate",
+      "maxRank": 5,
+      "rankLevelGates": [
+        30,
+        35,
+        40,
+        45,
+        50
+      ],
+      "basePowerCoefficient": 4.8,
+      "baseMana": 28,
+      "baseCooldownSeconds": 30,
+      "fxIds": [
+        "projectiles/arrow",
+        "impacts/bullet-impact"
+      ],
+      "damageModel": "per-target-per-cast",
+      "maxHitsPerTarget": 4,
+      "damageDurationSeconds": 2
+    }
+  ],
+  "enemyVariants": [
+    {
+      "id": "firefly-woods.slime",
+      "mapId": "firefly-woods",
+      "baseFxId": "critters/slime",
+      "name": {
+        "vi": "Slime non",
+        "en": "Young Slime"
+      },
+      "minLevel": 1,
+      "maxLevel": 2,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "firefly-woods.bat",
+      "mapId": "firefly-woods",
+      "baseFxId": "critters/bat",
+      "name": {
+        "vi": "Dơi rừng",
+        "en": "Forest Bat"
+      },
+      "minLevel": 3,
+      "maxLevel": 4,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "firefly-woods.frog",
+      "mapId": "firefly-woods",
+      "baseFxId": "critters/frog",
+      "name": {
+        "vi": "Ếch rừng",
+        "en": "Forest Frog"
+      },
+      "minLevel": 4,
+      "maxLevel": 5,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "deepwood.slime",
+      "mapId": "deepwood",
+      "baseFxId": "critters/slime",
+      "name": {
+        "vi": "Slime độc",
+        "en": "Poison Slime"
+      },
+      "minLevel": 6,
+      "maxLevel": 7,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "deepwood.snake",
+      "mapId": "deepwood",
+      "baseFxId": "critters/snake",
+      "name": {
+        "vi": "Rắn rừng",
+        "en": "Woodland Snake"
+      },
+      "minLevel": 8,
+      "maxLevel": 9,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "deepwood.wisp",
+      "mapId": "deepwood",
+      "baseFxId": "critters/wisp",
+      "name": {
+        "vi": "Tinh linh rừng",
+        "en": "Grove Wisp"
+      },
+      "minLevel": 9,
+      "maxLevel": 10,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "mist-marsh.frog",
+      "mapId": "mist-marsh",
+      "baseFxId": "critters/frog",
+      "name": {
+        "vi": "Ếch độc",
+        "en": "Poison Frog"
+      },
+      "minLevel": 11,
+      "maxLevel": 12,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "mist-marsh.snake",
+      "mapId": "mist-marsh",
+      "baseFxId": "critters/snake",
+      "name": {
+        "vi": "Rắn đầm",
+        "en": "Marsh Snake"
+      },
+      "minLevel": 13,
+      "maxLevel": 14,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "mist-marsh.jellyfish",
+      "mapId": "mist-marsh",
+      "baseFxId": "critters/jellyfish",
+      "name": {
+        "vi": "Sứa đầm",
+        "en": "Marsh Jellyfish"
+      },
+      "minLevel": 14,
+      "maxLevel": 15,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "forgotten-ruins.flying-skull",
+      "mapId": "forgotten-ruins",
+      "baseFxId": "critters/flying-skull",
+      "name": {
+        "vi": "Sọ bay cổ",
+        "en": "Ancient Flying Skull"
+      },
+      "minLevel": 16,
+      "maxLevel": 17,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "forgotten-ruins.eyeball",
+      "mapId": "forgotten-ruins",
+      "baseFxId": "critters/eyeball",
+      "name": {
+        "vi": "Nhãn quái cổ",
+        "en": "Ancient Eyeball"
+      },
+      "minLevel": 18,
+      "maxLevel": 19,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "forgotten-ruins.ghost",
+      "mapId": "forgotten-ruins",
+      "baseFxId": "critters/ghost",
+      "name": {
+        "vi": "Ma phế tích",
+        "en": "Ruin Ghost"
+      },
+      "minLevel": 19,
+      "maxLevel": 20,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "frost-peaks.slime",
+      "mapId": "frost-peaks",
+      "baseFxId": "critters/slime",
+      "name": {
+        "vi": "Slime băng",
+        "en": "Ice Slime"
+      },
+      "minLevel": 21,
+      "maxLevel": 22,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "frost-peaks.bat",
+      "mapId": "frost-peaks",
+      "baseFxId": "critters/bat",
+      "name": {
+        "vi": "Dơi băng",
+        "en": "Ice Bat"
+      },
+      "minLevel": 23,
+      "maxLevel": 24,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "frost-peaks.wisp",
+      "mapId": "frost-peaks",
+      "baseFxId": "critters/wisp",
+      "name": {
+        "vi": "Tinh linh băng",
+        "en": "Frost Wisp"
+      },
+      "minLevel": 24,
+      "maxLevel": 25,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "storm-highlands.bird",
+      "mapId": "storm-highlands",
+      "baseFxId": "critters/bird",
+      "name": {
+        "vi": "Điểu lôi",
+        "en": "Thunderbird"
+      },
+      "minLevel": 26,
+      "maxLevel": 27,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "storm-highlands.wisp",
+      "mapId": "storm-highlands",
+      "baseFxId": "critters/wisp",
+      "name": {
+        "vi": "Tinh linh sét",
+        "en": "Storm Wisp"
+      },
+      "minLevel": 28,
+      "maxLevel": 29,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "storm-highlands.eyeball",
+      "mapId": "storm-highlands",
+      "baseFxId": "critters/eyeball",
+      "name": {
+        "vi": "Nhãn quái sét",
+        "en": "Storm Eyeball"
+      },
+      "minLevel": 29,
+      "maxLevel": 30,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "ashen-valley.slime",
+      "mapId": "ashen-valley",
+      "baseFxId": "critters/slime",
+      "name": {
+        "vi": "Slime lửa",
+        "en": "Fire Slime"
+      },
+      "minLevel": 31,
+      "maxLevel": 32,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "ashen-valley.bat",
+      "mapId": "ashen-valley",
+      "baseFxId": "critters/bat",
+      "name": {
+        "vi": "Dơi tro",
+        "en": "Ash Bat"
+      },
+      "minLevel": 33,
+      "maxLevel": 34,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "ashen-valley.flying-skull",
+      "mapId": "ashen-valley",
+      "baseFxId": "critters/flying-skull",
+      "name": {
+        "vi": "Sọ lửa",
+        "en": "Flame Skull"
+      },
+      "minLevel": 34,
+      "maxLevel": 35,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "shadow-catacombs.ghost",
+      "mapId": "shadow-catacombs",
+      "baseFxId": "critters/ghost",
+      "name": {
+        "vi": "Ma hầm mộ",
+        "en": "Catacomb Ghost"
+      },
+      "minLevel": 36,
+      "maxLevel": 37,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "shadow-catacombs.flying-skull",
+      "mapId": "shadow-catacombs",
+      "baseFxId": "critters/flying-skull",
+      "name": {
+        "vi": "Sọ nguyền",
+        "en": "Cursed Skull"
+      },
+      "minLevel": 38,
+      "maxLevel": 39,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "shadow-catacombs.eyeball",
+      "mapId": "shadow-catacombs",
+      "baseFxId": "critters/eyeball",
+      "name": {
+        "vi": "Nhãn quái hắc ám",
+        "en": "Dark Eyeball"
+      },
+      "minLevel": 39,
+      "maxLevel": 40,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "astral-rift.wisp",
+      "mapId": "astral-rift",
+      "baseFxId": "critters/wisp",
+      "name": {
+        "vi": "Tinh linh hư không",
+        "en": "Void Wisp"
+      },
+      "minLevel": 41,
+      "maxLevel": 42,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "astral-rift.jellyfish",
+      "mapId": "astral-rift",
+      "baseFxId": "critters/jellyfish",
+      "name": {
+        "vi": "Sứa tinh giới",
+        "en": "Astral Jellyfish"
+      },
+      "minLevel": 43,
+      "maxLevel": 44,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "astral-rift.eyeball",
+      "mapId": "astral-rift",
+      "baseFxId": "critters/eyeball",
+      "name": {
+        "vi": "Nhãn quái tinh giới",
+        "en": "Astral Eyeball"
+      },
+      "minLevel": 44,
+      "maxLevel": 45,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "world-tree.snake",
+      "mapId": "world-tree",
+      "baseFxId": "critters/snake",
+      "name": {
+        "vi": "Rắn tha hóa",
+        "en": "Corrupted Snake"
+      },
+      "minLevel": 46,
+      "maxLevel": 47,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "world-tree.frog",
+      "mapId": "world-tree",
+      "baseFxId": "critters/frog",
+      "name": {
+        "vi": "Ếch hắc ám",
+        "en": "Dark Frog"
+      },
+      "minLevel": 48,
+      "maxLevel": 49,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    },
+    {
+      "id": "world-tree.ghost",
+      "mapId": "world-tree",
+      "baseFxId": "critters/ghost",
+      "name": {
+        "vi": "Ma hộ vệ",
+        "en": "Guardian Ghost"
+      },
+      "minLevel": 49,
+      "maxLevel": 50,
+      "artStatus": "requires-combat-animation-and-direction-adaptation"
+    }
+  ],
+  "progression": {
+    "xpFormula": "round((20 + 5*L) * (12 + 3*L + 0.08*L*L)); L<50",
+    "normalEnemyXpFormula": "20+5*enemyLevel",
+    "totalSkillPointsFormula": "1+floor(level/2)",
+    "activeSlotsUnlockedAt": [
+      1,
+      5,
+      10,
+      20
+    ],
+    "targetPlaytimeAnchorsMinutes": [
+      [
+        1,
+        0
+      ],
+      [
+        5,
+        20
+      ],
+      [
+        10,
+        60
+      ],
+      [
+        15,
+        120
+      ],
+      [
+        20,
+        210
+      ],
+      [
+        25,
+        300
+      ],
+      [
+        30,
+        420
+      ],
+      [
+        35,
+        540
+      ],
+      [
+        40,
+        690
+      ],
+      [
+        45,
+        870
+      ],
+      [
+        50,
+        1080
+      ]
+    ]
+  },
+  "rarityMultipliers": {
+    "common": 1,
+    "uncommon": 1.04,
+    "rare": 1.08,
+    "epic": 1.12,
+    "legendary": 1.16
+  },
+  "enhancement": {
+    "max": 3,
+    "additiveBaseStatPerRank": 0.04
+  },
+  "enemyScaling": {
+    "hpFormula": "round(26+8*L+0.35*L*L)",
+    "powerFormula": "round(5+2.2*L)",
+    "armorFormula": "round(0.8*L)",
+    "eliteHpMultiplier": 3,
+    "elitePowerMultiplier": 1.25,
+    "bossHpMultiplier": 10,
+    "bossPowerMultiplier": 1.7
+  }
+}

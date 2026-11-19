@@ -1,0 +1,10 @@
+[WebServer] (node:26413) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+  ✓  1 tests/browser/game.spec.js:19:50 › warrior: input, cast, pause, panel and reconnect (6.9s)
+  ✓  2 tests/browser/game.spec.js:19:50 › mage: input, cast, pause, panel and reconnect (6.3s)
+  ✓  3 tests/browser/game.spec.js:19:50 › archer: input, cast, pause, panel and reconnect (6.7s)
+
+  3 passed (21.3s)

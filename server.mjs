@@ -1,19 +1,8 @@
-import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
-import { resolve, extname, sep } from 'node:path';
-
-const root = fileURLToPath(new URL('.', import.meta.url));
-const port = Number(process.env.PORT ?? 5173);
-const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.md': 'text/plain; charset=utf-8' };
-createServer(async (req, res) => {
-  try {
-    const path = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
-    if (path.split('/').some(part => part.startsWith('.'))) { res.writeHead(403).end('Forbidden'); return; }
-    const file = resolve(root, '.' + (path.endsWith('/') ? path + 'index.html' : path));
-    if (!file.startsWith(root.endsWith(sep) ? root : root + sep)) { res.writeHead(403).end('Forbidden'); return; }
-    const body = await readFile(file);
-    res.writeHead(200, { 'Content-Type': types[extname(file)] ?? 'text/plain; charset=utf-8', 'Cache-Control': 'no-cache', 'X-Content-Type-Options': 'nosniff' });
-    res.end(req.method === 'HEAD' ? undefined : body);
-  } catch { res.writeHead(404).end('Not found'); }
-}).listen(port, '127.0.0.1', () => console.log(`PixelFX Explorer: http://localhost:${port}\nPress Ctrl+C to stop.`)).on('error', error => { console.error(error.code === 'EADDRINUSE' ? `Port ${port} is busy. Try PORT=5174 npm run dev` : error.message); process.exitCode = 1; });
+import 'dotenv/config';
+import {createApp} from './server/app.js';
+const production=process.env.NODE_ENV==='production';
+if(production&&(!process.env.DATABASE_URL||!process.env.APP_URL))throw new Error('Production requires DATABASE_URL and APP_URL');
+const port=Number(process.env.PORT??5173);
+const app=await createApp({production,trustProxy:process.env.TRUST_PROXY==='true',appURL:process.env.APP_URL??`http://localhost:${port}`,databaseURL:process.env.DATABASE_URL??'postgresql://nightwood:nightwood_local_only@127.0.0.1:54329/nightwood',authSecret:process.env.BETTER_AUTH_SECRET,emailProvider:process.env.EMAIL_PROVIDER,resendKey:process.env.RESEND_API_KEY,smtp:{host:process.env.SMTP_HOST??'127.0.0.1',port:Number(process.env.SMTP_PORT??1025),user:process.env.SMTP_USER,pass:process.env.SMTP_PASSWORD,secure:process.env.SMTP_SECURE==='true'},mailFrom:process.env.MAIL_FROM});
+app.server.listen(port,process.env.HOST??'127.0.0.1',()=>console.log(`Nightwood: http://localhost:${port}/?view=game\nAsset explorer: http://localhost:${port}/`));
+for(const signal of ['SIGTERM','SIGINT'])process.once(signal,async()=>{await app.close();process.exit(0);});

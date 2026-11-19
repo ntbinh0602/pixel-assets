@@ -84,6 +84,7 @@ function build(categories) {
 function closeMenu() { $('#sidebar').classList.remove('open'); $('#menu-toggle').setAttribute('aria-expanded', 'false'); }
 async function setView(view, updateURL = true) {
   state.view = view;
+  document.body.classList.toggle('in-game', view === 'game');
   const gaming = view === 'game';
   $('.intro').hidden = $('.library').hidden = gaming;
   $('#game-view').hidden = !gaming;
@@ -100,16 +101,16 @@ async function setView(view, updateURL = true) {
   }
   if (!gaming) { game?.activate(false); return; }
   try {
-    if (!gameLoading) gameLoading = import('./game/forest.js').then(({ ForestGame }) => {
-      game = new ForestGame($('#game-view'));
-      $('#forest-loading').hidden = true;
+    if (!gameLoading) gameLoading = import('./game/client/app.js').then(async ({ NightwoodGame }) => {
+      game = new NightwoodGame($('#game-view'));
+      await game.ready;
       $('#forest-canvas').dataset.ready = 'true';
     });
     await gameLoading;
     if (state.view === 'game') game.activate(true);
   } catch (error) {
     console.error('Forest map initialization failed:', error);
-    $('#forest-loading').textContent = 'Chưa mở được khu rừng. Hãy tải lại trang để thử lại.';
+    const message = document.createElement('p'); message.textContent = 'Chưa mở được khu rừng. Hãy tải lại trang để thử lại.'; $('#game-view').append(message);
   }
 }
 function setCategory(cat, favoritesOnly = false) {

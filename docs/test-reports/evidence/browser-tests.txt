@@ -1,0 +1,13 @@
+[WebServer] (node:23599) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+  ✓  1 tests/browser/game.spec.js:7:1 › Vietnamese default on English browser; register, verify email, choose class and preserve account locale (2.6s)
+  ✓  2 tests/browser/game.spec.js:19:50 › warrior: input, cast, pause, panel and reconnect (6.7s)
+  ✓  3 tests/browser/game.spec.js:19:50 › mage: input, cast, pause, panel and reconnect (6.0s)
+  ✓  4 tests/browser/game.spec.js:19:50 › archer: input, cast, pause, panel and reconnect (6.6s)
+  ✓  5 tests/browser/game.spec.js:29:1 › mobile touch controls, pointercancel and English UI fit viewport (2.1s)
+  ✓  6 tests/browser/game.spec.js:35:1 › asset library still contains 244 effects and opens a preview (659ms)
+
+  6 passed (26.0s)

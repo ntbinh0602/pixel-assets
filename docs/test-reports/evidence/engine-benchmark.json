@@ -1,0 +1,16 @@
+{
+  "scope": "Accelerated engine + JSON serialization only; no socket, database or client render",
+  "sessions": 25,
+  "simulatedSeconds": 600,
+  "wallSeconds": 14.05,
+  "tickBatchMs": {
+    "p50": 1.119,
+    "p95": 1.733,
+    "max": 34.777
+  },
+  "snapshots": 150000,
+  "approxJsonBytes": 743879772,
+  "node": "v20.20.2",
+  "platform": "darwin",
+  "arch": "arm64"
+}

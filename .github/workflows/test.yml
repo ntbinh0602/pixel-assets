@@ -1,0 +1,34 @@
+name: Game checks
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: nightwood
+          POSTGRES_PASSWORD: nightwood_local_only
+          POSTGRES_DB: nightwood
+        ports: ['54329:5432']
+        options: >-
+          --health-cmd "pg_isready -U nightwood" --health-interval 5s --health-timeout 5s --health-retries 10
+      mailpit:
+        image: axllent/mailpit:v1.27
+        ports: ['1025:1025', '8025:8025']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.22.0'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:all
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: game-test-results
+          path: |
+            test-results/
+            playwright-report/

@@ -10,3 +10,7 @@ sheets/
 
 # Vendor PixelFX source without including its local checkout metadata.
 pixelfx/.git/
+
+data/
+test-results/
+playwright-report/

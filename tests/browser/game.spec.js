@@ -1,0 +1,35 @@
+import {test,expect} from '@playwright/test';
+import {randomUUID} from 'node:crypto';
+import {account,mailFor} from '../helpers.mjs';
+const base='http://localhost:5180';
+async function cookie(context,a){await context.addCookies(a.cookie.split('; ').filter(s=>!s.startsWith('nw_locale')).map(c=>({name:c.split('=')[0],value:c.slice(c.indexOf('=')+1),url:base})));}
+const position=async page=>(await page.locator('#nw-position').textContent()).split(' / ').map(Number);
+test('Vietnamese default on English browser; register, verify email, choose class and preserve account locale',async({browser})=>{
+ const context=await browser.newContext({locale:'en-US'}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/?view=game');await expect(page.locator('html')).toHaveAttribute('lang','vi');await expect(page.locator('#nw-auth-submit')).toHaveText('Đăng nhập');
+ await page.locator('[data-auth-mode=signup]').click();const email=`browser-${randomUUID()}@example.test`;
+ await page.locator('#nw-auth-form [name=name]').fill('Người Lữ Hành');await page.locator('#nw-email').fill(email);await page.locator('[name=password]').fill('Browser-password123!');await page.locator('#nw-auth-submit').click();await expect(page.locator('[data-auth-mode=resend]')).toBeVisible();
+ await page.goto(await mailFor(email));await expect(page.locator('.nw-lobby')).toBeVisible();
+ await page.locator('#nw-language').click();await expect(page.locator('html')).toHaveAttribute('lang','en');await expect(page.locator('[data-choose-class=mage]')).toContainText('Mage');
+ await page.locator('[data-choose-class=mage]').click();await page.locator('#nw-character-name').fill('Ánh Trăng');await page.locator('#nw-create-form button[type=submit]').click();await expect(page.locator('[data-play]')).toHaveCount(1);await page.locator('[data-play]').click();await expect(page.locator('#nw-disconnected')).toBeHidden();await expect(page.locator('#nw-level')).toContainText('Mage');await expect(page.locator('#nw-hp')).toContainText('HP 116 / 116');
+ await page.screenshot({path:'test-results/desktop-game.png'});
+ const other=await browser.newContext();const second=await other.newPage();await second.goto('/?view=game');await second.locator('#nw-email').fill(email);await second.locator('[name=password]').fill('Browser-password123!');await second.locator('#nw-auth-submit').click();await expect(second.locator('.nw-lobby')).toBeVisible();await expect(second.locator('html')).toHaveAttribute('lang','en');await expect(second.locator('[data-play]')).toContainText('Ánh Trăng');
+ expect(errors).toEqual([]);await other.close();await context.close();
+});
+for(const classId of ['warrior','mage','archer'])test(classId+': input, cast, pause, panel and reconnect',async({page,context})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));const a=await account(base);await cookie(context,a);await page.goto('/?view=game');
+ await page.locator(`[data-choose-class=${classId}]`).click();await page.locator('#nw-character-name').fill('Anh Hùng '+classId);await page.locator('#nw-create-form button[type=submit]').click();await page.locator('[data-play]').click();await expect(page.locator('#nw-disconnected')).toBeHidden();
+ const start=await position(page);await page.locator('#forest-canvas').focus();await page.keyboard.down('KeyD');await page.waitForTimeout(500);await page.keyboard.up('KeyD');await page.waitForTimeout(200);const moved=await position(page);expect(moved[0]).toBeGreaterThan(start[0]+10);
+ await page.keyboard.press('Digit1');await expect(page.locator('#nw-mp')).not.toHaveText(classId==='mage'?'MP 140 / 140':classId==='warrior'?'MP 60 / 60':'MP 90 / 90');
+ await page.keyboard.press('KeyP');await expect(page.locator('#nw-paused')).toBeVisible();const paused=await position(page);await page.waitForTimeout(300);expect(await position(page)).toEqual(paused);await page.locator('#nw-resume').click();await expect(page.locator('#nw-paused')).toBeHidden();
+ await page.locator('[data-panel=inventory]').click();await expect(page.locator('#nw-panel')).toBeVisible();await expect(page.locator('.nw-item')).toHaveCount(3);await page.locator('.nw-item').nth(1).getByRole('button',{name:'Tháo',exact:true}).click();await expect(page.locator('.nw-item.worn')).toHaveCount(2);await page.locator('.nw-item').nth(1).getByRole('button',{name:'Trang bị',exact:true}).click();await expect(page.locator('.nw-item.worn')).toHaveCount(3);await page.locator('#nw-panel-close').click();await expect(page.locator('#nw-panel')).toBeHidden();
+ await page.reload();await page.locator('[data-play]').click();await expect(page.locator('#nw-disconnected')).toBeHidden();expect(await position(page)).toEqual(moved);if(await page.locator('#nw-paused').isVisible())await page.locator('#nw-resume').click();
+ await page.locator('#forest-canvas').focus();await page.keyboard.down('KeyA');await page.waitForTimeout(2000);await page.keyboard.up('KeyA');await page.locator('[data-attack]').hover();await page.mouse.down();await expect(page.locator('#nw-quest-count')).toContainText('1 / 3',{timeout:10000});await page.mouse.up();await expect(page.locator('#nw-save')).toContainText('Đã lưu');expect(errors).toEqual([]);
+});
+test('mobile touch controls, pointercancel and English UI fit viewport',async({browser})=>{
+ const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:2}),page=await context.newPage(),a=await account(base);await cookie(context,a);await page.goto('/?view=game');await page.locator('#nw-character-name').fill('Hiệp Sĩ');await page.locator('#nw-create-form button[type=submit]').click();await page.locator('[data-play]').click();await expect(page.locator('#nw-disconnected')).toBeHidden();
+ const pad=page.locator('[data-key=ArrowRight]');await expect(pad).toBeVisible();const before=await position(page),box=await pad.boundingBox(),cdp=await context.newCDPSession(page);await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:box.x+box.width/2,y:box.y+box.height/2}]});await page.waitForTimeout(400);await cdp.send('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});await page.waitForTimeout(200);const after=await position(page);expect(after[0]).toBeGreaterThan(before[0]);await page.waitForTimeout(250);expect(await position(page)).toEqual(after);
+ await page.locator('#nw-language').click();await expect(page.locator('html')).toHaveAttribute('lang','en');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.screenshot({path:'test-results/mobile-game.png'});
+ await page.locator('[data-panel=skills]').click();await expect(page.locator('.nw-skill-info')).toHaveCount(6);await page.screenshot({path:'test-results/mobile-skills.png'});await context.close();
+});
+test('asset library still contains 244 effects and opens a preview',async({page})=>{await page.goto('/');await expect(page.locator('.asset-card')).toHaveCount(244);await page.locator('.asset-card').first().click();await expect(page.locator('#detail')).toBeVisible();});
